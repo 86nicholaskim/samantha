@@ -1,0 +1,136 @@
+# -------------------------------
+# Python project inside /server
+# -------------------------------
+
+# Byte-compiled / optimized / DLL files
+server/__pycache__/
+server/**/*.py[cod]
+*$py.class
+
+# C extensions
+server/**/*.so
+
+# Distribution / packaging
+server/build/
+server/dist/
+server/develop-eggs/
+server/downloads/
+server/eggs/
+server/.eggs/
+server/lib/
+server/lib64/
+server/parts/
+server/sdist/
+server/var/
+server/wheels/
+server/share/python-wheels/
+server/*.egg-info/
+server/.installed.cfg
+server/*.egg
+server/MANIFEST
+
+# Installer logs
+server/pip-log.txt
+server/pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+server/htmlcov/
+server/.tox/
+server/.nox/
+server/.coverage
+server/.coverage.*
+server/.cache
+server/nosetests.xml
+server/coverage.xml
+server/*.cover
+server/*.py,cover
+server/.hypothesis/
+server/.pytest_cache/
+
+# Translations
+server/**/*.mo
+server/**/*.pot
+
+# Django / Flask
+server/*.log
+server/local_settings.py
+server/db.sqlite3
+server/db.sqlite3-journal
+server/instance/
+server/.webassets-cache
+
+# Sphinx documentation
+server/docs/_build/
+server/build/
+server/temp/
+
+# Jupyter Notebook
+server/.ipynb_checkpoints
+
+# IPython
+server/profile_default/
+server/ipython_config.py
+
+# ---------------------------------
+# Virtual Environments
+# ---------------------------------
+server/.venv/
+server/venv/
+server/env/
+server/ENV/
+server/env.bak/
+server/venv.bak/
+server/bin/
+server/Scripts/
+
+# ---------------------------------
+# Environment & Config (Secrets)
+# ---------------------------------
+server/.env
+server/.env.*
+!server/.env.example
+server/*.cfg
+server/*.ini
+!server/pyproject.toml
+!server/setup.cfg
+server/local_settings.py
+server/settings_local.py
+server/config_local.py
+server/secrets.json
+server/*.key
+server/*.pem
+server/*.crt
+
+# ---------------------------------
+# IDE / Editor / Cache
+# ---------------------------------
+server/.vscode/
+server/.idea/
+server/.mypy_cache/
+server/.pyre/
+server/.pytype/
+server/.dmypy.json
+server/dmypy.json
+
+# ---------------------------------
+# OS & Temp files
+# ---------------------------------
+.DS_Store
+*.log
+*.tmp
+*.temp
+.cache/
+
+# ---------------------------------
+# Node / Frontend (if exists)
+# ---------------------------------
+node_modules/
+dist/
+build/
+*.lock
+*.log
+
+# ---------------------------------
+# System
+# ---------------------------------
+Thumbs.db
