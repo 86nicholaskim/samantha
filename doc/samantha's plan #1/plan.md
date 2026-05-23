@@ -30,10 +30,10 @@
 
 ### Phase 1: The Secretary (사만다의 탄생)
 사만다의 기본적인 지능과 소통 능력을 갖추는 단계입니다.
-- **Step 4: 사만다의 뇌와 기억 (Fine-tuning 포함)**
+- **Step 4: 사만다의 뇌와 영혼 (Memory & Soul)**
     - **4.0 Data Engineering**: <Her> 대본 및 공감/비서 대화 패턴 데이터셋 구축.
     - **4.1 Samantha Training**: LoRA를 활용한 사만다 인격 모델링 학습.
-    - **4.2 Ollama Deployment**: 학습된 모델 배포 및 계획 분석 엔진(Brain) 구축.
+    - **4.2 Soul Integration**: 프로젝트 루트의 `soul/` 디렉토리를 통한 모델 독립적 자아 구축 및 Ollama 배포.
 - **Step 5: 사만다의 얼굴과 목소리**
     - 플로팅 비서 UI(Face) 및 브라우저 푸시 알림(Voice).
     - 오늘의 할 일 브리핑 기능.
@@ -61,9 +61,10 @@
 
 | 구분 | 기술 |
 | :--- | :--- |
-| **AI Engine** | Ollama, Gemma 4 (Multimodal) |
+| **Core Identity** | **Project Soul** (Identity & User Profile Archive) |
+| **AI Engine** | Ollama, Gemma 4:e4b (Multimodal) |
 | **Frontend** | React, TypeScript, Lexical Editor, MobX, Vite |
-| **Backend** | Node.js, Express, Rollup |
+| **Backend** | Node.js, Express, Rollup (with Python AI Bridge) |
 | **Desktop** | Electron.js |
 | **Database** | PostgreSQL, Prisma ORM |
 | **CI/CD** | GitHub Actions, Vercel |

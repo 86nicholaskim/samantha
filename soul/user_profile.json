@@ -1,0 +1,13 @@
+{
+  "user": {
+    "name": null,
+    "preferences": {
+      "communication_style": "informal",
+      "interests": []
+    },
+    "important_facts": [
+      "비 오는 날 창가에서 책 읽는 것을 좋아함"
+    ],
+    "last_interaction": null
+  }
+}

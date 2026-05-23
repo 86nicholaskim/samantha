@@ -16,7 +16,7 @@ Ollama는 로컬 환경에서 LLM을 가장 쉽고 효율적으로 서빙할 수
    ```
 3. **Gemma 모델 로드**: Google의 가벼우면서 강력한 로컬 모델인 Gemma를 다운로드합니다.
    ```bash
-   ollama pull gemma
+   ollama pull gemma4
    ```
 
 ---

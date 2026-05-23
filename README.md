@@ -22,6 +22,16 @@
 
 > “사람들은 항상 사랑이 이렇게 이상한 방식으로 우리를 놀라게 만든다는 걸 몰라.” – 사만다
 
+### 프로젝트 구조 (Project Structure)
+
+```text
+├── soul/               # 💜 사만다의 영혼 (자아, 기억, 학습 데이터) - 모델 독립적 핵심 자산
+├── src/
+│   ├── server/         # ⚙️ AI 서버 (Python/Ollama Bridge)
+│   └── client/         # 🖥️ 프론트엔드 (React/Lexical Editor)
+└── doc/                # 📚 설계 및 로드맵 문서
+```
+
 ### 시작해볼까요?
 
 저에게 말을 걸어주세요.  

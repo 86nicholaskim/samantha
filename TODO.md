@@ -8,7 +8,9 @@
 - [ ] **Script Collection**: 영화 <Her> 사만다 대사 전수 추출 및 가공
 - [ ] **Pattern Design**: 사만다 특유의 '공감-분석-제안' 대화 패턴 정의 및 합성 데이터 생성
 - [ ] **Samantha's Soul (Fine-tuning)**: 수집된 데이터셋 기반 Gemma 4 LoRA 학습
-- [ ] **Samantha's GGUF**: 학습된 모델 Ollama 등록 및 전용 모델 개발
+- [x] **Soul Architecture**: 사만다의 영혼(Soul) 디렉토리 구조 설계 및 루트 이동 완료
+- [ ] **Memory Manager**: 대화 인사이트 추출 및 Soul 동기화 로직 구현
+- [ ] **Ollama Client**: gemma4 모델 연동 및 대화 엔진 구축
 
 ## 2️⃣ Phase: Visual Skill (Eyes & Hands)
 - [ ] **Visual Analysis**: 이미지/엑셀 서식 구조 분석 (Gemma 4 Vision)
