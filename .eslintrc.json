@@ -1,0 +1,8 @@
+
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier" // 반드시 마지막에 추가하여 Prettier와 충돌하는 룰을 끕니다.
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm turbo run build",
+  "installCommand": "pnpm install",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "apps/backend/dist/server.js"
+    }
+  ],
+  "functions": {
+    "apps/backend/dist/server.js": {
+      "includeFiles": "apps/backend/dist/**,apps/backend/public/**"
+    }
+  }
+}
+
