@@ -33,7 +33,7 @@
 - **Step 4: 사만다의 뇌와 영혼 (Memory & Soul)**
     - **4.0 Data Engineering**: <Her> 대본 및 공감/비서 대화 패턴 데이터셋 구축.
     - **4.1 Samantha Training**: LoRA를 활용한 사만다 인격 모델링 학습.
-    - **4.2 Soul Integration**: 프로젝트 루트의 `soul/` 디렉토리를 통한 모델 독립적 자아 구축 및 Ollama 배포.
+    - **4.2 Soul Integration & Evolution**: [완료] 모델 독립적 자아 구조 구축 및 Memory Manager를 통한 자율 성장/백업 시스템 구현.
 - **Step 5: 사만다의 얼굴과 목소리**
     - 플로팅 비서 UI(Face) 및 브라우저 푸시 알림(Voice).
     - 오늘의 할 일 브리핑 기능.

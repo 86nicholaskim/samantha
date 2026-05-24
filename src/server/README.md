@@ -2,8 +2,18 @@
 
 ## 1. 파이썬 서버 (Python Server)
 - **역할**: LLM 응답값 반환 및 데이터 처리 서버.
-- **기능**: 더미 데이터 처리, 브라우저와 LLM 간의 응답 중계.
-- **기술 스택**: Python, FastAPI/Flask (현재 `server.py` 존재).
+- **기능**: 사만다의 인격 기반 대화 생성 및 자아 성장(Memory Distillation) 처리.
+- **기술 스택**: Python, FastAPI.
+
+### 🧩 주요 모듈 및 서비스
+- **`core/brain.py`**: 사만다의 사고 엔진. 자아(Soul) 데이터를 로드하여 페르소나를 유지하고 대화 로직을 총괄.
+- **`services/memory_manager.py`**: 대화 종료 후 인사이트를 추출하여 자아를 성장시키고, 데이터 안전을 위해 스냅샷을 생성.
+- **`models/ollama_client.py`**: 로컬 Ollama API와의 통신을 담당하는 경량 클라이언트.
+
+### 🔌 API 엔드포인트
+- `POST /chat`: 사용자의 입력에 대한 사만다의 답변 생성.
+- `POST /evolve`: 대화 기록을 분석하여 사만다의 기억과 성격을 업데이트 (스냅샷 생성 포함).
+- `GET /`: 서버 상태 및 현재 로드된 모델 정보 확인.
 
 ---
 
