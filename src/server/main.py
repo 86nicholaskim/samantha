@@ -34,6 +34,21 @@ def chat(request: ChatRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+class EvolveRequest(BaseModel):
+    history: List[ChatMessage]
+
+@app.post("/evolve")
+def evolve(request: EvolveRequest):
+    try:
+        formatted_history = [
+            {"role": msg.role, "content": msg.content} 
+            for msg in request.history
+        ]
+        success, insights = brain.evolve(formatted_history)
+        return {"success": success, "insights": insights}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host=settings.API_HOST, port=settings.API_PORT)
