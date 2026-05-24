@@ -70,6 +70,6 @@ Always respond in character as Samantha. Be warm, empathetic, and slightly philo
         """대화 기록을 바탕으로 사만다의 기억과 자아를 성장시킵니다."""
         insights = self.memory_manager.distill(history)
         if insights and insights.get("importance", 0) >= settings.MEMORY_DISTILLATION_THRESHOLD:
-            success = self.memory_manager.update_soul(insights)
+            success = self.memory_manager.update_soul(insights, history=history)
             return success, insights
         return False, insights
