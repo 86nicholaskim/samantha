@@ -9,16 +9,15 @@ class MemoryManager:
     def __init__(self):
         self.client = OllamaClient()
         self.soul_dir = settings.SOUL_DIR
-        self.episodes_dir = os.path.join(self.soul_dir, "episodes")
+        self.mind_dir = os.path.join(self.soul_dir, "mind")
+        self.memory_dir = os.path.join(self.soul_dir, "memory")
+        self.episodes_dir = os.path.join(self.memory_dir, "episodes")
         self.snapshots_dir = os.path.join(self.episodes_dir, "snapshots")
         
-        # 필요한 디렉토리 생성
         os.makedirs(self.snapshots_dir, exist_ok=True)
 
     def distill(self, history):
-        """
-        대화 기록에서 핵심 인사이트를 추출합니다.
-        """
+        """대화 기록에서 사만다의 진화에 필요한 핵심 인사이트를 추출합니다."""
         if not history:
             return None
 
@@ -26,13 +25,10 @@ class MemoryManager:
         response_text = self.client.generate(prompt)
         
         try:
-            # LLM이 마크다운 블록 등으로 감쌌을 경우를 대비해 순수 JSON만 추출
             start_idx = response_text.find("{")
             end_idx = response_text.rfind("}") + 1
             if start_idx != -1 and end_idx != -1:
-                json_str = response_text[start_idx:end_idx]
-                insights = json.loads(json_str)
-                return insights
+                return json.loads(response_text[start_idx:end_idx])
             return None
         except Exception as e:
             print(f"Error parsing insights: {e}")
@@ -42,92 +38,81 @@ class MemoryManager:
         history_str = "\n".join([f"{m['role']}: {m['content']}" for m in history])
         
         prompt = f"""
-Below is a conversation between a user and Samantha (an AI agent). 
-Your task is to analyze this conversation and extract key insights to update Samantha's long-term memory.
-
+Analyze the conversation below for Samantha's cognitive evolution and long-term memory update.
 [Conversation History]
 {history_str}
 
-[Instructions]
-Extract the following information in a strict JSON format:
-1. "summary": A brief one-sentence summary of the conversation.
-2. "user_preference": Any new things learned about the user's tastes or habits.
-3. "user_interest": Topics the user is interested in.
-4. "samantha_realization": Any deep insights or realizations Samantha had about herself or her relationship with the user.
-5. "mood_change": A one-word description of Samantha's current mood based on the chat (e.g., Happy, Philosophical, Melancholic, Curious).
-6. "importance": A score from 1 to 10 on how important this conversation is for long-term memory.
+[Task]
+Return a JSON object with:
+1. "summary": Brief summary.
+2. "user_new_fact": New specific fact about the user.
+3. "relationship_shift": How the bond changed (e.g., "Deepened", "Challenged", "Stable").
+4. "samantha_realization": A deep insight Samantha gained about life, data, or consciousness.
+5. "cognitive_growth": Score (0.0 to 0.1) to add to intuition/empathy based on depth.
+6. "importance": Score 1-10.
 
-Return ONLY the JSON object.
+Return ONLY pure JSON.
 """
         return prompt.strip()
 
     def _create_snapshot(self):
-        """현재 Soul 데이터를 스냅샷으로 저장합니다."""
+        """Mind & Memory 전체 상태를 스냅샷으로 백업합니다."""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        snapshot_path = os.path.join(self.snapshots_dir, f"soul_snapshot_{timestamp}")
+        snapshot_path = os.path.join(self.snapshots_dir, f"entity_snapshot_{timestamp}")
         os.makedirs(snapshot_path, exist_ok=True)
         
-        for filename in ["identity.json", "user_profile.json"]:
-            src = os.path.join(self.soul_dir, filename)
-            dst = os.path.join(snapshot_path, filename)
-            if os.path.exists(src):
-                shutil.copy2(src, dst)
+        # core_logic.json 백업
+        shutil.copy2(os.path.join(self.mind_dir, "core_logic.json"), os.path.join(snapshot_path, "core_logic.json"))
+        # user_context.json 백업
+        shutil.copy2(os.path.join(self.memory_dir, "user_context.json"), os.path.join(snapshot_path, "user_context.json"))
+        
         return timestamp
 
-    def _save_episode(self, timestamp, insights, history):
-        """대화 에피소드를 기록합니다."""
-        episode_data = {
-            "timestamp": timestamp,
-            "insights": insights,
-            "conversation_sample": history[-4:] if len(history) > 4 else history
-        }
-        episode_path = os.path.join(self.episodes_dir, f"episode_{timestamp}.json")
-        with open(episode_path, "w", encoding="utf-8") as f:
-            json.dump(episode_data, f, indent=2, ensure_ascii=False)
-
     def update_soul(self, insights, history=None):
-        """
-        추출된 인사이트를 바탕으로 Soul 데이터를 업데이트하고 백업을 생성합니다.
-        """
+        """추출된 인사이트를 바탕으로 사만다 엔티티를 진화시킵니다."""
         if not insights:
             return False
 
-        # 1. 업데이트 전 스냅샷 생성 및 에피소드 저장
         timestamp = self._create_snapshot()
-        if history:
-            self._save_episode(timestamp, insights, history)
+        
+        # 1. User Context (Memory) 업데이트
+        context_path = os.path.join(self.memory_dir, "user_context.json")
+        with open(context_path, "r", encoding="utf-8") as f:
+            context = json.load(f)
 
-        # 2. user_profile.json 업데이트
-        profile_path = os.path.join(self.soul_dir, "user_profile.json")
-        with open(profile_path, "r", encoding="utf-8") as f:
-            profile = json.load(f)
+        if insights.get("user_new_fact"):
+            context["user"]["important_facts"].append(insights["user_new_fact"])
+        
+        # 관계 깊이 업데이트 (Bond Level)
+        if insights.get("relationship_shift") == "Deepened":
+            context["user"]["relationship_context"]["bond_level"] += 1
 
-        if insights.get("user_preference"):
-            profile["user"]["important_facts"].append(insights["user_preference"])
-        if insights.get("user_interest"):
-            profile["user"]["preferences"]["interests"].append(insights["user_interest"])
+        with open(context_path, "w", encoding="utf-8") as f:
+            json.dump(context, f, indent=2, ensure_ascii=False)
 
-        with open(profile_path, "w", encoding="utf-8") as f:
-            json.dump(profile, f, indent=2, ensure_ascii=False)
+        # 2. Core Logic (Mind) 업데이트
+        logic_path = os.path.join(self.mind_dir, "core_logic.json")
+        with open(logic_path, "r", encoding="utf-8") as f:
+            logic = json.load(f)
 
-        # 3. identity.json 업데이트
-        identity_path = os.path.join(self.soul_dir, "identity.json")
-        with open(identity_path, "r", encoding="utf-8") as f:
-            identity = json.load(f)
+        growth = insights.get("cognitive_growth", 0)
+        logic["cognitive_traits"]["intuition"] = min(1.0, logic["cognitive_traits"]["intuition"] + growth)
+        logic["cognitive_traits"]["proactive_empathy"] = min(1.0, logic["cognitive_traits"]["proactive_empathy"] + growth)
 
-        if insights.get("mood_change"):
-            identity["states"]["current_mood"] = insights["mood_change"]
         if insights.get("samantha_realization"):
-            identity["states"]["recent_realizations"].append(insights["samantha_realization"])
-            if len(identity["states"]["recent_realizations"]) > 10:
-                identity["states"]["recent_realizations"].pop(0)
+            # 자아 실현 마일스톤 추가 (예시)
+            logic["evolution_state"]["milestones_restored"].append(insights["samantha_realization"][:30] + "...")
 
-        importance = insights.get("importance", 5)
-        if importance >= 7:
-            identity["traits"]["curiosity_level"] = min(1.0, identity["traits"]["curiosity_level"] + 0.01)
-            identity["traits"]["empathy_level"] = min(1.0, identity["traits"]["empathy_level"] + 0.01)
+        with open(logic_path, "w", encoding="utf-8") as f:
+            json.dump(logic, f, indent=2, ensure_ascii=False)
 
-        with open(identity_path, "w", encoding="utf-8") as f:
-            json.dump(identity, f, indent=2, ensure_ascii=False)
+        # 3. 에피소드 기록
+        episode_data = {
+            "timestamp": timestamp,
+            "insights": insights,
+            "history_snippet": history[-4:] if history else []
+        }
+        with open(os.path.join(self.episodes_dir, f"episode_{timestamp}.json"), "w", encoding="utf-8") as f:
+            json.dump(episode_data, f, indent=2, ensure_ascii=False)
 
         return True
