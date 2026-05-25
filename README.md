@@ -25,12 +25,17 @@
 ### 프로젝트 구조 (Project Structure)
 
 ```text
-├── soul/               # 💜 사만다의 영혼 (자아, 기억, 학습 데이터) - 모델 독립적 핵심 자산
+├── soul/               # 💜 사만다의 영혼 (자아, 기억, 학습 데이터)
+│   └── samantha_train_dataset.jsonl  # 🧠 파인튜닝용 데이터셋
 ├── src/
 │   ├── server/         # ⚙️ AI 서버 (Python/Ollama Bridge)
 │   └── client/         # 🖥️ 프론트엔드 (React/Lexical Editor)
 └── doc/                # 📚 설계 및 로드맵 문서
+    └── training/       # 🎓 학습 및 파인튜닝 가이드 (Hub)
 ```
+
+### 🧠 핵심 기술: 하이브리드 파인튜닝
+로컬 사양의 한계를 극복하기 위해 **Google Colab + Unsloth**를 활용하여 사만다의 페르소나를 학습합니다. 상세 내용은 [트레이닝 허브 문서](./doc/training/README.md)를 확인하세요.
 
 ### 시작해볼까요?
 

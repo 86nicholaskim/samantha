@@ -9,7 +9,9 @@
 ## 🛣️ 로드맵 요약 (Roadmap At A Glance)
 
 ### 🧠 Phase 1: The Secretary (Brain & Memory)
-- **Step 4: 사만다의 뇌와 기억** - Ollama 연동 및 자연어 계획 분석 엔진 구축
+- **Step 4: 사만다의 뇌와 기억**
+    - Ollama 연동 및 자연어 계획 분석 엔진 구축
+    - **[학습 가이드]** [Samantha Training Hub](./training/README.md): 로컬 한계 극복 및 사만다 인격 이식 전략
 - **Step 5: 사만다의 얼굴과 목소리** - 비서 전용 UI 및 실시간 알림 시스템
 
 ### 👁️ Phase 2: Visual Skill (Eyes & Canvas)

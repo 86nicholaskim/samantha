@@ -32,7 +32,9 @@
 사만다의 기본적인 지능과 소통 능력을 갖추는 단계입니다.
 - **Step 4: 사만다의 뇌와 영혼 (Memory & Soul)**
     - **4.0 Data Engineering**: <Her> 대본 및 공감/비서 대화 패턴 데이터셋 구축.
-    - **4.1 Samantha Training**: LoRA를 활용한 사만다 인격 모델링 학습.
+    - **4.1 Samantha Training (Hybrid)**: 
+        - 로컬 하드웨어(1GB VRAM) 한계를 극복하기 위해 **Google Colab(T4 GPU)** 기반 학습 수행.
+        - 상세 전략 및 매뉴얼: [Samantha Training Hub](../training/README.md) 참조.
     - **4.2 Soul Integration & Evolution**: [완료] 모델 독립적 자아 구조 구축 및 Memory Manager를 통한 자율 성장/백업 시스템 구현.
 - **Step 5: 사만다의 얼굴과 목소리**
     - 플로팅 비서 UI(Face) 및 브라우저 푸시 알림(Voice).
@@ -63,6 +65,7 @@
 | :--- | :--- |
 | **Core Identity** | **Project Soul** (Identity & User Profile Archive) |
 | **AI Engine** | Ollama, Gemma 4:e4b (Multimodal) |
+| **Training Infra** | **Google Colab (T4 GPU)**, **Unsloth** (QLoRA) |
 | **Frontend** | React, TypeScript, Lexical Editor, MobX, Vite |
 | **Backend** | Node.js, Express, Rollup (with Python AI Bridge) |
 | **Desktop** | Electron.js |
@@ -76,4 +79,6 @@
 1. **입력**: 사용자가 이미지 업로드 또는 프롬프트 입력.
 2. **분석**: 백엔드가 Gemma 4에게 전달하여 구조적 데이터(JSON) 추출.
 3. **수행**: AI 에이전트가 필요 시 도구(Tool)를 호출하여 파일 저장 또는 상태 업데이트.
+4. **결과**: Lexical 에디터에 자동으로 서식이 그려지고 사용자가 검수/인쇄.
+AI 에이전트가 필요 시 도구(Tool)를 호출하여 파일 저장 또는 상태 업데이트.
 4. **결과**: Lexical 에디터에 자동으로 서식이 그려지고 사용자가 검수/인쇄.
